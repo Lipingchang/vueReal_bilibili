@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
