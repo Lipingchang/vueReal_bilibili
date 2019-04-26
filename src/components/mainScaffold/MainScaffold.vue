@@ -1,16 +1,17 @@
 <template lang="html">
   <div class="hello">
     <h1>{{ msg }}</h1>
-  
+    <img src="./logo.png">
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Hello World Vue'
+      msg: 'MainScaffold vue'
     }
   }
 }

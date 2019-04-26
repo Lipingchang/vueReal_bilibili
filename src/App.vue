@@ -1,13 +1,26 @@
 <template lang="html">
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
+    <div class="buttonbox">
+      <button @click="clickRoute('HelloWorld')">route1</button>
+      <button @click="clickRoute('MainScaffold')">route2</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data: function(){
+    return {
+
+    }
+  },
+  methods: {
+    clickRoute: function(dst){
+      this.$router.push(dst)
+    }
+  },
 }
 </script>
 
@@ -19,5 +32,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.buttonbox {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
 }
 </style>
