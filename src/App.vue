@@ -1,13 +1,30 @@
 <template lang="html">
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
+    <div class="buttonbox">
+      <button @click="clickRoute('Home')">Home</button>
+      <button @click="clickRoute('Channel')">Channel</button>
+      <button @click="clickRoute('News')">News</button>
+      <button @click="clickRoute('Shopping')">Shopping</button>
+    </div>
+    <div class="maxbox"></div>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data: function(){
+    return {
+
+    }
+  },
+  methods: {
+    clickRoute: function(dst){
+      this.$router.push(dst)
+    }
+  },
 }
 </script>
 
@@ -19,5 +36,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.buttonbox {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+.maxbox {
+  width: 100%;
+  background: red;
 }
 </style>
