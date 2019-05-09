@@ -2,8 +2,10 @@
   <div id="app">
     <router-view/>
     <div class="buttonbox">
-      <button @click="clickRoute('HelloWorld')">route1</button>
-      <button @click="clickRoute('MainScaffold')">route2</button>
+      <button @click="clickRoute('Home')">Home</button>
+      <button @click="clickRoute('Channel')">Channel</button>
+      <button @click="clickRoute('News')">News</button>
+      <button @click="clickRoute('Shopping')">Shopping</button>
     </div>
     <div class="maxbox"></div>
 
