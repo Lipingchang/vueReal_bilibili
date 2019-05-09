@@ -4,9 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>fake</title>
+    <style>
+      div {
+        margin-bottom: 10px;
+      }
+      .maxbox {
+        width: 100%;
+        background: red;
+      }
+      .extendbox {
+        width: 1000px;
+        height: 400px;
+        background: rgb(22, 22, 73);
+        color: white;
+        overflow: hidden;
+      }
+      html {
+        width: 100px;
+        height: 300px;
+        overflow: hidden;
+        border: black solid 10px;
+        background: burlywood;
+      }
+      .innerbox {
+        width: 2000px;
+        height: 500px;
+        background: rebeccapurple;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <!-- <div id="app"></div> -->
     <!-- built files will be auto injected -->
+    <div class="maxbox">100% box</div>
+    <div class="extendbox">1000px box
+      <div class="innerbox"></div>
+    </div>
+    <div class="extendbox">1000px box</div>
+    <div class="extendbox">1000px box</div>
+    <div class="extendbox">1000px box</div>
   </body>
 </html>

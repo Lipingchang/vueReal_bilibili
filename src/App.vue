@@ -5,6 +5,8 @@
       <button @click="clickRoute('HelloWorld')">route1</button>
       <button @click="clickRoute('MainScaffold')">route2</button>
     </div>
+    <div class="maxbox"></div>
+
   </div>
 </template>
 
@@ -38,5 +40,9 @@ export default {
   right: 0;
   bottom: 0;
   position: fixed;
+}
+.maxbox {
+  width: 100%;
+  background: red;
 }
 </style>
