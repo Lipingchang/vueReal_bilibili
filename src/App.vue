@@ -1,6 +1,5 @@
 <template lang="html">
   <div id="app">
-    <router-view/>
     <div class="headbox">
       <div class="headbox_head">
         <div class="ic tab"></div>
@@ -31,12 +30,16 @@
         <div class="ic contact"></div>
       </div>
     </div>
+    
     <div class="buttonbox">
       <button :class="{'on':'Home'==currentPage}" @click="clickRoute('Home')" ><div class="nav_img home"></div><span>首页</span></button>
       <button :class="{'on':'Channel'==currentPage}" @click="clickRoute('Channel')" ><div class="nav_img channel"></div><span>频道</span></button>
       <button :class="{'on':'News'==currentPage}" @click="clickRoute('News')" ><div class="nav_img news"></div><span>动态</span></button>
       <button :class="{'on':'Shopping'==currentPage}" @click="clickRoute('Shopping')" ><div class="nav_img shopping"></div><span>会员购</span></button>
     </div>
+
+    <router-view/>
+
   </div>
 </template>
 
