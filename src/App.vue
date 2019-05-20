@@ -2,13 +2,33 @@
   <div id="app">
     <router-view/>
     <div class="headbox">
-      <div class="ic tab"></div>
-      <div class="headbox_home">
+      <div class="headbox_head">
+        <div class="ic tab"></div>
         <div class="ic avatar"></div>
+      </div>
+
+      <div v-if="'Home'==currentPage" class="headbox_child">
         <div class="searchbox"><i></i></div>
         <div class="ic newgame"></div>
         <div class="ic download"></div>
         <div class="ic chat"></div>
+      </div>
+
+      <div v-if="'Channel'==currentPage" class="headbox_child channel">
+        <div class="title_text">频道</div>
+        <div class="ic download"></div>
+        <div class="ic search"></div>
+      </div>
+
+      <div v-if="'News'==currentPage" class="headbox_child news">
+        <div class="title_text">动态</div>
+        <div class="ic editor"></div>
+      </div>
+
+      <div v-if="'Shopping'==currentPage" class="headbox_child shopping">
+        <div class="title_text">会员购</div>
+        <div class="ic shoppingcar"></div>
+        <div class="ic contact"></div>
       </div>
     </div>
     <div class="buttonbox">
@@ -56,12 +76,19 @@ export default {
   width: 100%;
   height: 50px;
   background: @bilibili_pink;
+  display: flex;
 }
-.headbox>div {
+.headbox>.headbox_head{
+  display: inline-block;
+  position: relative;
+  height: inherit;
+}
+.headbox>.headbox_child {
   height: inherit;
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex: 1 1 0;
 }
 .headbox .ic {
   display: inline-block;
@@ -70,7 +97,7 @@ export default {
   margin: 0px 15px;
   background-size: 25px 25px;
 }
-.headbox>.tab { // 滑动抽屉开关
+.headbox>.headbox_head .tab { // 滑动抽屉开关
   position: absolute;
   left: 0;
   top: 0;
@@ -78,14 +105,17 @@ export default {
   background-image: url("./assets/head_bars.png");
   transform: translate(-70%,50%);
 }
-
-// headbox_home 主页的顶部栏配置
-.headbox .avatar {
+.headbox>.headbox_head .avatar {
   background-image: url("./assets/avatar.jpg");
   border-radius: 50%;
   margin-right: 0px;
   border: 1px white solid;
+  top: 0;
+  transform: translateY(45%);
 }
+
+// headbox_child 主页的顶部栏配置
+
 .searchbox {
   background-color: #e97093;
   height: 30px;
@@ -116,8 +146,36 @@ export default {
 .chat {
   background-image: url("./assets/head_chat.png");
 }
-
-
+// headbox_child channel的配置
+.title_text {
+  flex: 1 1 0;
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+.search {
+  background-image: url("./assets/head_search.png");
+}
+.headbox_child.channel .title_text {
+  margin-left: 80px;
+}
+// headbox_child news的配置
+.editor {
+  background-image: url("./assets/head_edit.png")
+}
+.headbox_child.news .title_text {
+  margin-left: 30px;
+}
+// headbox_child shopping的配置
+.shoppingcar {
+  background-image: url("./assets/head_car.png");
+}
+.contact {
+  background-image: url("./assets/head_contact.png");
+}
+.headbox_child.shopping .title_text {
+  margin-left: 80px;
+}
 // 导航栏
 .buttonbox {
   left: 0;
