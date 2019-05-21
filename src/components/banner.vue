@@ -1,6 +1,6 @@
 <template>
-  <div id="bannerroot">
-    <div class="bannerbox" ref="bannerbox" :style="{ 'transform': bannertranslate }"> 
+  <div id="bannerroot" ref="bannerroot">
+    <div class="bannerbox" ref="bannerbox" :style="{ 'transform': bannertranslate ,'transition-duration': istouching ? '0ms' : '200ms' }"> 
       <img class="bannerimage" v-for="(url,id) in imageurls" :key="id" v-bind:src="url"/>
     </div>
   </div>
@@ -10,7 +10,9 @@
 export default {
   data: function(){
     return {
-      bannerX: 0
+      bannerX: 0,
+      currentPage: 0,
+      istouching: false,
     }
   },
   computed:{
@@ -27,9 +29,35 @@ export default {
     }
   },
   mounted: function(){
+    let that = this
+    let root = this.$refs['bannerroot']
     let box = this.$refs['bannerbox']
-    box.addEventListener('touchmove',function(event){
-      console.log(event.targetTouches[0]['clientX'])
+    let startX = 0
+    let lastX = 0
+    let vw = document.documentElement.offsetWidth
+    root.addEventListener('touchmove',function(event){
+      // console.log('move')
+      let x = event.targetTouches[0]['clientX']
+      if ( !(that.currentPage === 0 && (x-startX)+lastX>=vw*0.2) &&
+           !(that.currentPage===(that.imageurls.length-1) && (x-startX)+lastX<=-vw*1.2)){
+        that.bannerX = (x-startX)+lastX
+      }
+    })
+    root.addEventListener('touchstart',function(event){
+      // console.log('start')
+      that.istouching = true
+      startX = event.targetTouches[0]['clientX'] 
+    })
+    root.addEventListener('touchend',function(event){
+      // console.log('end')
+      that.istouching = false
+      let offset = that.bannerX % vw
+      let tmp = that.bannerX / vw
+      let offpage = Math.round(tmp)
+      that.bannerX = vw * offpage
+      that.currentPage = -offpage
+      lastX = that.bannerX
+
     })
   }
 }
@@ -49,6 +77,7 @@ data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKC
   display: flex;
   width: 100%;
   height: 100px;
+  transition-duration: 200ms;
 }
 .bannerimage {
   width: calc(100vw - 20px);
