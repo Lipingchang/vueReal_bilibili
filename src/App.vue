@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "./assets/colors.less";
+@import "./assets/constant.less";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -66,6 +66,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   position: relative;
+  height: 100%;
 }
 
 // 顶部栏
@@ -74,7 +75,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: @head_height;
   background: @bilibili_pink;
   display: flex;
 }
@@ -92,10 +93,10 @@ export default {
 }
 .headbox .ic {
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: @head_ic_size;
+  height: @head_ic_size;
   margin: 0px 15px;
-  background-size: 25px 25px;
+  background-size: @head_ic_size @head_ic_size;
 }
 .headbox>.headbox_head .tab { // 滑动抽屉开关
   position: absolute;
@@ -183,7 +184,7 @@ export default {
   bottom: 0;
   position: fixed;
   width: 100%;
-  height: 60px;
+  height: @nav_height;
   background: rgba(255,255,255,0.9);
   display: flex;
   justify-content: space-around;
@@ -215,14 +216,14 @@ export default {
 .buttonbox button>div {
   display: block;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: @nav_icon_size;
+  height: @nav_icon_size;
   right: 50%;
   left: 50%;
   transform: translate(-50%, -110%); 
 }
 .buttonbox .nav_img{
-  background-size: 20px 20px;
+  background-size: @nav_icon_size @nav_icon_size;
   background-repeat: no-repeat;
 }
 .buttonbox .nav_img.home{
