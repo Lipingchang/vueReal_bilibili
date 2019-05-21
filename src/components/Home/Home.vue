@@ -12,28 +12,19 @@
       </ul>
     </div>
 
-    <div style="width:100px;height:200px;background:red;"></div>
-    <div style="width:100px;height:200px;background:black;"></div>
-    <div style="width:100px;height:200px;background:blue;"></div>
-    <div style="width:100px;height:200px;background:red;"></div>
-    <div style="width:100px;height:200px;background:black;"></div>
-    <div style="width:100px;height:200px;background:blue;"></div>
-    <div style="width:100px;height:200px;background:red;"></div>
-    <div style="width:100px;height:200px;background:black;"></div>
-    <div style="width:100px;height:200px;background:blue;"></div>
-    <div style="width:100px;height:200px;background:red;"></div>
-    <div style="width:100px;height:200px;background:black;"></div>
-    <div style="width:100px;height:200px;background:blue;"></div>
-    <div style="width:100px;height:200px;background:red;"></div>
-    <div style="width:100px;height:200px;background:black;"></div>
-    <div style="width:100px;height:200px;background:blue;"></div>
+    <banner></banner>
 
   </div>
 </template>
 
 
 <script>
+import banner from '@/components/banner'
+
 export default {
+  components:{
+    'banner':banner,
+  },
   data: function(){
     let ret = {
       main_cards: ['直播','推荐','热门','追番','影视'],
@@ -60,6 +51,7 @@ export default {
       // let tmp = titlecards.getAttribute('class')
       // titlecards.setAttribute('class','fixtop '+tmp)
     })
+
   }
 }
 </script>
