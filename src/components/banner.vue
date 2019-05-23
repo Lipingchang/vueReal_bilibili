@@ -91,7 +91,6 @@ data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDA
   width: calc(100vw - 20px);
   margin: 10px;
   border-radius: 5px;
-  background-size: ;
   background-position: center center;
   // border: 1px red solid;
 }
