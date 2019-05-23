@@ -12,7 +12,7 @@
       </ul>
     </div>
 
-    <banner></banner>
+    <banner :bannerHeigh="100"></banner>
 
   </div>
 </template>
