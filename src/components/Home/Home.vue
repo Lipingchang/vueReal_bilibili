@@ -12,7 +12,7 @@
       </ul>
     </div>
 
-    <banner :bannerHeigh="100"></banner>
+    <banner :imageurls="bannerurls" :bannerHeigh="100"></banner>
 
   </div>
 </template>
@@ -29,6 +29,7 @@ export default {
     let ret = {
       main_cards: ['直播','推荐','热门','追番','影视'],
       currentCard: '',
+      'bannerurls':[],
     }
     ret['currentCard'] = ret['main_cards'][0]
     return ret
@@ -40,18 +41,10 @@ export default {
   },
   mounted: function(){
     let homelist = this.$refs['homelist']
-    homelist.addEventListener('scroll', (event)=>{
-      // console.log(event)
-      // console.log(this.$refs['titlecards'].offsetTop)
-      // console.log(this.$refs['titlecards'].getBoundingClientRect().y)
-      let titlecards = this.$refs['titlecards']
-      let y = titlecards.getBoundingClientRect().y
-      // if ( y <= - titlecards.clientHeight )
-        
-      // let tmp = titlecards.getAttribute('class')
-      // titlecards.setAttribute('class','fixtop '+tmp)
-    })
+    this.$myapi.getBanners().then((res)=>{
+      this.bannerurls = res['data']['banners']
 
+    })
   }
 }
 </script>

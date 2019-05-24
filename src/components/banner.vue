@@ -1,10 +1,10 @@
 <template>
   <div id="bannerroot" ref="bannerroot">
-    <div class="bannerbox" ref="bannerbox" :style="{ 'transform': bannertranslate ,'transition-duration': istouching ? '0ms' : '200ms' ,'width':imageurls.length*100+'vw','height':bannerHeigh+'px'}"> 
+    <div class="bannerbox" ref="bannerbox" :style="{ 'transform': bannertranslate ,'transition-duration': istouching ? '0ms' : duration+'ms' ,'width':imageurls.length*100+'vw','height':bannerHeigh+'px'}"> 
       <img class="bannerimage" v-for="(url,id) in imageurls" :key="id"  :style="{'background-image':'url('+url+')'}"/>
     </div>
     <div class="pointer">
-      <i v-for="(i,index) in imageurls.length" v-bind:key="index" :class="{'on':index==currentPage}" />
+      <i v-for="(i,index) in imageurls.length" v-bind:key="index" :class="{'on':index==currentPage}" @click="pointerClick(index)" />
     </div>
   </div>
 </template>
@@ -16,12 +16,21 @@ export default {
       bannerX: 0,
       currentPage: 0,
       istouching: false,
+      lastX:0,
+      duration: 200,
     }
   },
   computed:{
     bannertranslate: function(){
       return 'translateX(' + this.bannerX + 'px)'
     },
+  },
+  methods:{
+    pointerClick:function(index){
+      this.bannerX = -index*document.documentElement.clientWidth
+      this.currentPage = index
+      this.lastX = this.bannerX
+    }
   },
   props: {
     imageurls:{
@@ -36,35 +45,32 @@ export default {
     }
   },
   mounted: function(){
-    
     let that = this
     let root = this.$refs['bannerroot']
     let box = this.$refs['bannerbox']
     let startX = 0
-    let lastX = 0
     let vw = document.documentElement.offsetWidth
     root.addEventListener('touchmove',function(event){
-      // console.log('move')
+      console.log('move',startX,that.lastX,that.bannerX)
       let x = event.targetTouches[0]['clientX']
-      if ( !(that.currentPage === 0 && (x-startX)+lastX>=vw*0.2) &&
-           !(that.currentPage===(that.imageurls.length-1) && (x-startX)+lastX<=-vw*1.2)){
-        that.bannerX = (x-startX)+lastX
+      if ( (!(that.currentPage === 0 && (x-startX)+that.lastX>=vw*0.2)) &&
+           !( (x-startX)+that.lastX < (-vw*(that.imageurls.length-1)-vw*0.2) ) ){
+        that.bannerX = (x-startX)+that.lastX
       }
     })
     root.addEventListener('touchstart',function(event){
-      // console.log('start')
+      console.log('start',startX,that.lastX,that.bannerX)
       that.istouching = true
       startX = event.targetTouches[0]['clientX'] 
     })
     root.addEventListener('touchend',function(event){
-      // console.log('end')
       that.istouching = false
-      let offset = that.bannerX % vw
       let tmp = that.bannerX / vw
       let offpage = Math.round(tmp)
       that.bannerX = vw * offpage
       that.currentPage = -offpage
-      lastX = that.bannerX
+      that.lastX = that.bannerX
+      console.log('end',startX,that.lastX,that.bannerX)
 
     })
   }

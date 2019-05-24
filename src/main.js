@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import Mock from './api/mock'
 import axios from 'axios'
+import myapi from './api'
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://www.kingofsingledog.club/fakebilibili/api1/' // 设置默认请求的url
 Vue.prototype.$http = axios
+Vue.prototype.$myapi = myapi
 
 new Vue({
   el: '#app',
