@@ -13,6 +13,7 @@
         <span class="yellowbg" v-if="longVideo!=''">{{longVideo}}</span>
         <span class="yellowbg" v-if="isWatching">已关注</span>
         <span class="desctext">{{upperName}}</span>
+        <span class="extendbox"></span>
       </div>
     </div>
   </div>
@@ -150,7 +151,7 @@ export default {
   align-content: center;
 }
 .desc>div>span {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .desc .yellowbg {
   display: inline-block;
@@ -164,5 +165,18 @@ export default {
 .desc .desctext {
   color: #aaaaaa;
   font-size: 10px;
+}
+.desc .extendbox {
+  flex-grow: 1;
+  margin: 0;
+  text-align: right;
+}
+.desc .extendbox::after {
+  content: " ";
+  display: inline-block;
+  background-image: url("./more.png");
+  background-size: cover;
+  width: 15px;
+  height: 15px;
 }
 </style>
