@@ -12,22 +12,29 @@
       </ul>
     </div>
 
-    <banner></banner>
-
+    <!-- <banner></banner> -->
+    <div class="testcards">
+      <videocard></videocard>
+      <videocard></videocard>
+      <videocard></videocard>
+      <videocard></videocard>
+    </div>
   </div>
 </template>
 
 
 <script>
 import banner from '@/components/banner'
+import videocard from '@/components/video/video'
 
 export default {
   components:{
     'banner':banner,
+    'videocard':videocard,
   },
   data: function(){
     let ret = {
-      main_cards: ['直播','推荐','热门','追番','影视'],
+      main_cards: ['直播','推荐','热门','追番','影视','70年'],
       currentCard: '',
     }
     ret['currentCard'] = ret['main_cards'][0]
@@ -92,7 +99,14 @@ export default {
 .title_cards li.on {
   border-bottom: 3px @bilibili_pink solid;
 }
-</style>
 
-
+.testcards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.testcards>div {
+  width: 47%;
+  margin-bottom: 20px;
+}
 </style>
