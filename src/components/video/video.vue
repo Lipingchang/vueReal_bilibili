@@ -28,7 +28,7 @@ export default {
     return {
       height: 150,
       videoBg: 'url('+defaultPicBg+')',
-      playCount:12000,
+      playCount: 12000,
       bulletCount: 1200,
       duration: 200,
       videoTitle: '这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~',

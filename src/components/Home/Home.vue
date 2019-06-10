@@ -5,59 +5,73 @@
           <li v-for="(card,index) in main_cards" 
             v-bind:key="index" 
             :class="{'on':currentCard==card}"
-            @click="handleCardClick(card)"
+            @click="handleCardClick(card,index)"
             >
             {{card}}
           </li>
       </ul>
     </div>
+    <transition
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:leave="leave"
+      v-bind:css="false"
+    >
+      <router-view></router-view>
+    </transition>
 
-    <!-- <banner></banner> -->
-    <div class="testcards">
-      <videocard></videocard>
-      <videocard></videocard>
-      <videocard></videocard>
-      <videocard></videocard>
-    </div>
   </div>
 </template>
 
 
 <script>
-import banner from '@/components/banner'
-import videocard from '@/components/video/video'
+import Velocity from 'velocity-animate'
 
 export default {
-  components:{
-    'banner':banner,
-    'videocard':videocard,
-  },
+
   data: function(){
     let ret = {
       main_cards: ['直播','推荐','热门','追番','影视','70年'],
       currentCard: '',
+      currentCardIndex: 0,
+      beforeCardIndex: 0,
     }
     ret['currentCard'] = ret['main_cards'][0]
     return ret
   },
   methods: {
-    handleCardClick: function(clickedCard){
+    handleCardClick: function(clickedCard,index){
       this.currentCard = clickedCard
+      this.$router.push('/Home/'+clickedCard)
+      this.beforeCardIndex = this.currentCardIndex
+      this.currentCardIndex = index
+    },
+    beforeEnter: function(el){
+      Velocity(el,{opacity: 0})
+      if ( this.beforeCardIndex < this.currentCardIndex )
+        Velocity(el,{translateX: '100%'})
+      else 
+        Velocity(el,{translateX: '-100%'})
+    },
+    enter: function(el,done){
+      Velocity(el, {translateX:'0%', opacity: 1 }, { complete: done })
+    },
+
+    leave: function(el,done){
+      if ( this.beforeCardIndex < this.currentCardIndex )
+        Velocity(el, { translateX: '-100%'}, { duration: 400 ,complete: done })
+      else 
+        Velocity(el, { translateX: '100%'}, { duration: 400 ,complete: done })
     }
   },
   mounted: function(){
     let homelist = this.$refs['homelist']
     homelist.addEventListener('scroll', (event)=>{
-      // console.log(event)
-      // console.log(this.$refs['titlecards'].offsetTop)
-      // console.log(this.$refs['titlecards'].getBoundingClientRect().y)
+
       let titlecards = this.$refs['titlecards']
       let y = titlecards.getBoundingClientRect().y
-      // if ( y <= - titlecards.clientHeight )
-        
-      // let tmp = titlecards.getAttribute('class')
-      // titlecards.setAttribute('class','fixtop '+tmp)
     })
+    this.$router.push('/Home/直播')
 
   }
 }

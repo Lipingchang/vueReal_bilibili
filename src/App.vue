@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     clickRoute: function(dst){
-      this.$router.push(dst)
+      this.$router.push('/'+dst)
       this.currentPage = dst
     }
   },
@@ -193,6 +193,7 @@ export default {
   display: flex;
   justify-content: space-around;
   border-top: 1px solid #e5e5e5;
+  z-index: 99;
 }
 .buttonbox button{
   flex: 1 1 0;
