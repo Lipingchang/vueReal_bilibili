@@ -1,19 +1,16 @@
 <template>
-  <div class="video">
+  <div class="simplevideo">
     <div class="pic" v-bind:style="{'height':height+'px','background-image': videoBg}">
       <div class="iconlist">
+        <i><span>{{upperName}}</span></i>
         <i class="playcount"><span>{{playCount | formatCount}}</span></i>
-        <i class="bulletcount"><span>{{bulletCount | formatCount}}</span></i>
-        <span>{{duration | formatDuration}}</span>
       </div>
     </div>
     <div class="desc">
       <p>{{videoTitle}}</p>
       <div>
-        <span class="yellowbg" v-if="longVideo!=''">{{longVideo}}</span>
-        <span class="yellowbg" v-if="isWatching">已关注</span>
-        <span class="desctext"><p>{{upperName}}</p></span>
-        <span class="extendbox"></span>
+        <span class="desctext"><p>{{subTitle}}</p></span>
+        <!-- <span class="extendbox"></span> -->
       </div>
     </div>
   </div>
@@ -31,38 +28,24 @@ export default {
       height: 150,
       videoBg: 'url(' + this.data.picBg +')',//'url('+defaultPicBg+')',
       playCount: this.data.playCount,
-      bulletCount: this.data.bulletCount,
-      duration: this.data.duration,
       videoTitle: this.data.videoTitle,// '这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~这是视频标题~',
-      videoType_a: '手机平板',
-      videoType_b: '手机',
       
-      isWatching: this.data.isWatching,// true,  // 关注
-      isLive: this.data.isLive,      // 直播
       upperName: this.data.upperName, // up主名字
-
-      niceCount: 100, // 点赞数
-      coinCount: 1000, // 硬币数
-
-      longVideo: this.data.longVideo, // 电视剧 纪录片 电影
-      
+      subTitle: this.data.subTitle
     }
   },
   watch: {
     change: function(){
       this.videoBg = 'url(' + this.data.picBg +')' //'url('+defaultPicBg+')',
       this.playCount = this.data.playCount
-      this.bulletCount = this.data.bulletCount
-      this.duration = this.data.duration
       this.videoTitle = this.data.videoTitle 
-      this.isWatching = this.data.isWatching// true,  // 关注
-      this.isLive = this.data.isLive      // 直播
       this.upperName = this.data.upperName // up主名字
-      this.longVideo = this.data.longVideo // 电视剧 纪录片 电影
+      this.subTitle = this.data.subTitle
 
     }
   },
   mounted: function () {
+    // console.log(this.data)
   },
   filters: {
     formatCount: function (num_o) { // 转成 万 为单位的
@@ -102,17 +85,18 @@ export default {
 
 <style scoped>
 .video {
-  border: 1px solid #efefef;
-  background-color: white;
-  border-radius: 8px;
+  /* border: 1px solid #efefef; */
+  /* background-color: white; */
   /* margin: 1px; */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .pic {
   height: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
+  border-radius: 8px;
+
 }
 .pic .iconlist {
   width: 100%;
@@ -122,6 +106,7 @@ export default {
   bottom: 0;
   display: flex;
   filter: drop-shadow(0px 0px 2px #000000);
+  justify-content: space-between;
 }
 .pic i {
   margin-left: 5px;
@@ -137,18 +122,18 @@ export default {
   vertical-align: bottom;
   margin: 0px 5px 5px 5px;
 }
-.pic .iconlist i:nth-child(2)::before {
+/* .pic .iconlist i:nth-child(2)::before {
   display: inline-block;
   content: "";
   background-image: url('./bullutcount.png');
   width: 20px;
   height: 20px;
   background-size: cover;
-}
-.iconlist i:first-child::before {
+} */
+.iconlist i:nth-child(2)::before {
   display: inline-block;
   content: "";
-  background-image: url('./displaycount.png');
+  background-image: url('./ic_live_watch_count.png');
   width: 20px;
   height: 20px;
   background-size: cover;
@@ -184,12 +169,12 @@ export default {
 .desc .desctext {
   color: #aaaaaa;
   font-size: 10px;
-  width: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .desc .desctext p {
   margin: 0;
+  font-weight: 400;
 }
 .desc .extendbox {
   flex-grow: 1;

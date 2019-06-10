@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Mock from 'mockjs'
 
 Vue.config.productionTip = false
+Vue.prototype.$Random = Mock.Random
 
 new Vue({
   el: '#app',

@@ -1,8 +1,9 @@
 <template lang="html">
   <div id="app">
+    <silderbar v-model="silderopen"></silderbar>
     <div class="headbox">
       <div class="headbox_head">
-        <div class="ic tab"></div>
+        <div class="ic tab" @click="silderopen=!silderopen"></div>
         <div class="ic avatar"></div>
       </div>
 
@@ -39,16 +40,22 @@
     </div>
 
     <router-view/>
+    <div class="buttonboxmasker"></div>
 
   </div>
 </template>
 
 <script>
+import silderbar from '@/components/silderbar/silderbar'
 export default {
+  components: {
+    'silderbar': silderbar
+  },
   name: 'App',
   data: function(){
     return {
       currentPage: 'Home',
+      silderopen: false
     }
   },
   methods: {
@@ -257,5 +264,9 @@ export default {
 }
 .buttonbox button.on .nav_img.shopping{
   background-image: url("./assets/nav_shopping_on.png");
+}
+.buttonboxmasker {
+  height: @nav_height;
+  background-color: rgba(0, 0, 0, 0);
 }
 </style>
