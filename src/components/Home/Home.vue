@@ -112,6 +112,7 @@ export default {
 }
 .title_cards li.on {
   border-bottom: 3px @bilibili_pink solid;
+  color: @bilibili_pink;
 }
 
 .testcards {
