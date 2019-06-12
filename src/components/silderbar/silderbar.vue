@@ -19,12 +19,50 @@
             <span>开通大会员畅看番剧国创</span>
             <i class="go"></i>
           </div>
+
+          <div class="line2">
+            <div>
+              <span>{{newCount}}</span>
+              <span>动态</span>
+            </div>
+            <div>
+              <span>{{watchingCount}}</span>
+              <span>关注</span>
+            </div>
+            <div>
+              <span>{{fansCount}}</span>
+              <span>粉丝</span>
+            </div>
+          </div>
+
+          <div class="listline">
+            <div v-for="(item,index) in silderlist" :key="index" @click="silderclick(index)" :class="{'on':clickItem==index}">
+              <i class="listitem" :style="{'background-image':'url('+item['img']+')'}"></i>
+              <span>{{item['name']}}</span>
+              <div class="newicon" v-show="item.hasnew">
+                <span class="newicon">NEW</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottomsettings">
+            <div><div><div class="settings"></div></div><span>设置</span></div>
+            <div><div><div class="themes"></div></div><span>主题</span></div>
+            <div><div><div class="nightmode"></div></div><span>夜间</span></div>
+          </div>
         </div>
     </div>
 </template>
 
 <script>
 import Velocity from 'velocity-animate'
+const pic1 = require('./tab.png')
+const pic2 = require('./history.png')
+const pic3 = require('./download.png')
+const pic4 = require('./collection.png')
+const pic5 = require('./afterwatch.png')
+const pic6 = require('./upload.png')
+const pic7 = require('./flag-f.png')
 
 export default {
   props: ['value'],
@@ -39,6 +77,17 @@ export default {
       newCount: 0,
       watchingCount: 128,
       fansCount: 1,
+      silderlist: [
+        { img: pic1, name:'首页',hasnew: false},
+        { img: pic2, name:'历史记录', hasnew: false},
+        { img: pic3, name:'离线缓存', hasnew: false},
+        { img: pic4, name:'我的收藏', hasnew: false},
+        { img: pic5, name:'稍后再看', hasnew: true},
+        { img: pic6, name:'投稿成为up主', hasnew: false},
+        { img: pic7, name:'热门活动', hasnew: false},
+      ],
+      clickItem: 0,
+
     }
   },
   mounted: function(){
@@ -65,6 +114,9 @@ export default {
   methods:{
     changeSilderStatus: function(){
       this.$emit('input', !this.value)
+    },
+    silderclick: function(index){
+      this.clickItem = index
     }
   }
 }
@@ -73,6 +125,7 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/constant";
 .silderbar {
+  transform: translateX(-100%);
   background-color: rgba(0,0,0,0.5);
   width: 100vw;
   height: 100vh;
@@ -187,7 +240,87 @@ span.ishuiyuan {
   background-size: cover;
 }
 
+.line2 {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px;
+  margin: 10px 0;
+  background-color: white;
+  color: #8d8d8d;
+}
+.line2>div{
+  display: flex;
+  flex-direction: column;
+}
 
+.listline .on {
+  background: #ebebeb;
+  color: @bilibili_pink;
+}
+.listline>div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 10px 20px;
+}
+.listline i {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  margin-right: 20px;
+}
+.listline div.newicon {
+  flex-grow: 1;
+  text-align: right;
+}
+.listline span.newicon {
+  background-color: @bilibili_pink;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: white;
+  font-size: 10px;
+}
 
+.bottomsettings {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.bottomsettings >div{
+  display: flex;
+  align-items: center;
+}
+.bottomsettings span {
+  height: min-content;
+  margin-left: 10px;
+  font-size: 10px;
+}
+.bottomsettings >div>div {
+  width: 20px;
+  height: 20px;  
+  border: 1px #8d8d8d solid;
+  padding: 9px;
+  border-radius: 50%;
+}
+.bottomsettings>div>div>div {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  margin: auto;
+}
+.settings {
+  background-image: url('./设置.png')
+}
+.themes {
+  background-image: url('./主题.png')
+}
+.nightmode {
+  background-image: url('./夜间模式.png')
+}
 </style>
 
