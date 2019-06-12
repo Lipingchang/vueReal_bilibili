@@ -11,6 +11,7 @@ import zhuifan from '@/components/Home/zhuifan'
 import yinshi from '@/components/Home/yinshi'
 import senventy from '@/components/Home/senventy'
 import body from '@/components/navigationBody/navigationbody'
+import player from '@/components/player/player'
 
 Vue.use(Router)
 
@@ -69,6 +70,11 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/player',
+      name: 'player',
+      component: player
+    }
     
   ]
 })
