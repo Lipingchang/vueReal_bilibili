@@ -3,10 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Mock from 'mockjs'
+import Mockjs from 'mockjs'
+
+
+import MockR from './api/mock'
+import axios from 'axios'
+import myapi from './api'
 
 Vue.config.productionTip = false
-Vue.prototype.$Random = Mock.Random
+Vue.prototype.$Random = Mockjs.Random
+
+Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://www.kingofsingledog.club/fakebilibili/api1/' // 设置默认请求的url
+Vue.prototype.$http = axios
+Vue.prototype.$myapi = myapi
 
 new Vue({
   el: '#app',

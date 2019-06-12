@@ -1,6 +1,8 @@
 <template>
     <div class="zhibo">
       <!-- <banner></banner> -->
+      <banner :imageurls="bannerurls" :bannerHeigh="120"></banner>
+
       <div class="miniIconList">
         <i v-for="(icon,index) in miniIconList" :key="index" style></i>
       </div>
@@ -87,6 +89,7 @@ export default {
   },
   data: function(){
     return {
+      'bannerurls':[],
       miniIconList: ['英雄联盟','虚拟主播','第五人格','王者荣耀','视频唱见','唱见电台','APEX英雄','守望先锋','只狼：影逝二度','全部标签'],
       mydd: [],
       nowTimer: new Date(),
@@ -105,11 +108,11 @@ export default {
     }
   },
   methods: {
-    createRecommends: function(){
+    createRecommends: function(sum){
       if ( this.mydd.length == 0 ){
-        for( let k = 0; k<10; k++ ){ this.mydd.push({change:false})}
+        for( let k = 0; k<sum; k++ ){ this.mydd.push({change:false})}
       }
-      for( let k =0; k< 10;k++ ){
+      for( let k =0; k< sum;k++ ){
         let ttitle = this.$Random.ctitle(7,15)
         this.mydd[k]['change'] = !this.mydd[k]['change']
         this.mydd[k].isWatching = this.$Random.pick([true,false])
@@ -156,9 +159,14 @@ export default {
     }
   },
   created: function(){
-    this.createRecommends()
+    this.createRecommends(4)
     this.createRadios()
     this.createRadios2()
+  },
+  mounted: function(){
+    this.$myapi.getBanners().then((res)=>{
+      this.bannerurls = res['data']['banners']
+    })
   }
 }
 </script>
