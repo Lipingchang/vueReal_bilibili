@@ -7,7 +7,7 @@
         <i v-for="(icon,index) in miniIconList" :key="index" style></i>
       </div>
       <div class="recommend">
-        <div class="recommendtitle"><span>推荐直播</span><span @click="createRecommends()" style="cursor:pointer;">换一换</span></div>
+        <div class="recommendtitle"><span>推荐直播</span><span @click="createRecommends(4)" style="cursor:pointer;">换一换</span></div>
         <div class="recommendbody">
           <videocard v-for="(dd,index) in mydd" :data="dd" :key="index" :change="dd['change']"></videocard>
         </div>
