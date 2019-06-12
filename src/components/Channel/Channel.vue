@@ -92,6 +92,9 @@ export default {
   width: 25vw;
   height: 25vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center
 }
 .channel_list div img{
   width: 15vw; height: 15vw;
