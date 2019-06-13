@@ -11,6 +11,11 @@ import zhuifan from '@/components/Home/zhuifan'
 import yinshi from '@/components/Home/yinshi'
 import senventy from '@/components/Home/senventy'
 
+import zonghe from '@/components/News/zonghe'
+import shiping from '@/components/News/shiping'
+import remeng2 from '@/components/News/remeng'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -54,7 +59,21 @@ export default new Router({
     {
       path: '/news',
       name: 'News',
-      component: News
+      component: News,
+      children: [
+        {
+          path: '视频',
+          component: shiping,
+        },
+        {
+          path: '综合',
+          component: zonghe,
+        },
+        {
+          path: '热门',
+          component: remeng2,
+        }
+      ]
     },
     {
       path: '/shopping',
