@@ -1,5 +1,5 @@
 <template>
-  <div class="video">
+  <div class="video" @click="$router.push('/player')">
     <div class="pic" v-bind:style="{'height':height+'px','background-image': videoBg}">
       <div class="iconlist">
         <i class="playcount"><span>{{playCount | formatCount}}</span></i>

@@ -1,17 +1,19 @@
 <template>
   <div ref="mainplayerbox" class="mainplayerbox"> 
     <div class="titlebar" :class="{'on':titleon}" ref="titlebar">
-      <div class="backarrow"></div>
+      <div class="backarrow" @click="goback()"></div>
       <div class="moreicon"></div>
     </div>
     <div class="playerbox" ref="playerbox" ></div>
     <div class="commentsbox" style="height:10000px" ref="commentsbox">
+      <div class="commentstitlehelper" :class="{'ontop':titleon}"></div>
       <div class="commentstitle" :class="{'ontop':titleon}">
         <div>
           <div :class="{'on': commentroute == 'jianjie'}" @click="changeview('jianjie')">简介</div>
           <div :class="{'on': commentroute == 'pinglun'}" @click="changeview('pinglun')">评论 {{commentsCount}}</div>
         </div>
       </div>
+      <router-view/>
     </div>
   </div>
 </template>
@@ -28,10 +30,15 @@ export default {
   methods: {
     changeview: function(viewname){
       this.commentroute = viewname
-      // this.$router.push(viewname)
+      this.$router.replace('/player/'+viewname)
+    },
+    goback: function(){
+      this.$router.go(-1)
     }
   },
   mounted: function(){
+    this.$router.replace('/player/jianjie')
+
     let commentsbox = this.$refs['commentsbox']
     let playerbox = this.$refs['playerbox']
     let titlebar = this.$refs['titlebar']
@@ -85,6 +92,13 @@ export default {
   background-color: black;
 }
 
+.commentstitlehelper {
+  display: none;
+}
+.commentstitlehelper.ontop {
+  display: block;
+  height: 40px;
+}
 .commentstitle.ontop {
   position: fixed;
   top: 60px;
@@ -96,6 +110,8 @@ export default {
   justify-content: space-around;
   border-bottom: 1px solid #f1e7e7;
   width: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 50px -15px;
 }
 .commentstitle>div>div {
   padding: 8px;

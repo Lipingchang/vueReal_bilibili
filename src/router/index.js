@@ -13,6 +13,9 @@ import senventy from '@/components/Home/senventy'
 import body from '@/components/navigationBody/navigationbody'
 import player from '@/components/player/player'
 
+import player_jianjie from '@/components/player/jianjie'
+import plyaer_comments from '@/components/player/comments'
+
 Vue.use(Router)
 
 export default new Router({
@@ -73,7 +76,17 @@ export default new Router({
     {
       path: '/player',
       name: 'player',
-      component: player
+      component: player,
+      children: [
+        {
+          path:'jianjie',
+          component: player_jianjie
+        },
+        {
+          path:'pinglun',
+          component: plyaer_comments
+        }
+      ]
     }
     
   ]
