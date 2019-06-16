@@ -29,16 +29,21 @@
         <div class="share"><i></i> <span>分享</span></div>
       </div>
       <tagbox :tags="tags"/>
-
+      <div class="aboutvideos">
+        <henvideo v-for="(data,index) in list1" :data="data" :key="index"></henvideo>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import tagbox from '@/components/tagbox/tagbox'
+import henvideo from '@/components/video/henvideio'
 
 export default {
   components: {
-    'tagbox': tagbox
+    'tagbox': tagbox,
+    'henvideo': henvideo
+
   },
   data() {
     return {
@@ -51,7 +56,30 @@ export default {
       fanscount: 2000,
       avaterurl: this.$Random.image('100x100'),
       likecount: 5,
-      tags: ['a','b','c','d']
+      tags: ['a','b','c','d','d','d','bbb','ccc','asdfas'],
+      list1:[]
+    }
+  },
+  mounted() {
+    this.createList(this.list1,10)
+  },
+  methods: {
+    createList: function(list,size){
+      while( list.length < size ){
+        list.push({})
+      }
+
+      for( let i = 0; i< size; i++ ){
+        let tmp = list[i]
+        tmp['duration'] = this.$Random.integer(61,900)
+        tmp['title'] = this.$Random.ctitle(5,10)
+        tmp['typea'] = this.$Random.pick(['百万播放','新上榜'])
+        tmp['typeb'] = this.$Random.pick(['百万点赞','大家都在搜'])
+        tmp['uppername'] = this.$Random.cname() + this.$Random.clast()
+        tmp['playcount'] = this.$Random.integer(400,100000)
+        tmp['url'] = this.$Random.dataImage('200x100')
+        tmp['uploadTime'] = this.$Random.datetime()
+      }
     }
   },
 }

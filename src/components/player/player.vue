@@ -5,7 +5,7 @@
       <div class="moreicon"></div>
     </div>
     <div class="playerbox" ref="playerbox" ></div>
-    <div class="commentsbox" style="height:10000px" ref="commentsbox">
+    <div class="commentsbox" ref="commentsbox">
       <div class="commentstitlehelper" :class="{'ontop':titleon}"></div>
       <div class="commentstitle" :class="{'ontop':titleon}">
         <div>
@@ -69,6 +69,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 .titlebar.on {
   background-color: @bilibili_pink;
@@ -104,6 +105,7 @@ export default {
   top: 60px;
   left: 0;
   width: 100%;
+  z-index: 100;
 }
 .commentstitle>div {
   display: flex;
